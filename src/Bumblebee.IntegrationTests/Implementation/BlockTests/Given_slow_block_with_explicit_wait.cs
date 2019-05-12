@@ -1,11 +1,17 @@
-﻿using Bumblebee.IntegrationTests.Shared.Hosting;
+﻿using System.Threading;
+
+using Bumblebee.Implementation;
+using Bumblebee.IntegrationTests.Shared.Hosting;
 using Bumblebee.IntegrationTests.Shared.Pages;
+using Bumblebee.Interfaces;
 using Bumblebee.Setup;
 using Bumblebee.Setup.DriverEnvironments;
 
 using FluentAssertions;
 
 using NUnit.Framework;
+
+using OpenQA.Selenium;
 
 namespace Bumblebee.IntegrationTests.Implementation
 {
@@ -36,6 +42,24 @@ namespace Bumblebee.IntegrationTests.Implementation
                 .FirstName
                 .Text
                 .Should().Be("Todd");
+        }
+
+        [Test]
+        public void NavigateToGitHub()
+        {
+	        var gitHub = Threaded<Session>.With<Chrome>().NavigateTo<GitHub>("https://github.com/Bumblebee/Bumblebee");
+
+			Thread.Sleep(4000);
+
+			gitHub.Press<Page>(Key.Slash);
+			Thread.Sleep(4000);
+        }
+
+        public class GitHub : Page
+        {
+	        public GitHub(Session session) : base(session)
+	        {
+	        }
         }
     }
 }

@@ -61,6 +61,11 @@ namespace Bumblebee.Implementation
 			throw new NotImplementedException();
 		}
 
+		public TResult Press<TResult>(Key key) where TResult : IBlock
+		{
+			throw new NotImplementedException();
+		}
+
 		private IAlert WaitForAlert()
 		{
 			var wait = new WebDriverWait(Session.Driver, TimeSpan.FromSeconds(5));

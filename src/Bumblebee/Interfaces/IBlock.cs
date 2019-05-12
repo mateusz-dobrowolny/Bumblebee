@@ -8,5 +8,7 @@ namespace Bumblebee.Interfaces
 	{
 		IWebElement FindElement(By @by);
 		IEnumerable<IWebElement> FindElements(By @by);
+
+		TResult Press<TResult>(Key key) where TResult : IBlock;
 	}
 }

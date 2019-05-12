@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
+using Bumblebee.Extensions;
 using Bumblebee.Interfaces;
 using Bumblebee.Setup;
 using Bumblebee.Specifications;
@@ -179,6 +180,19 @@ namespace Bumblebee.Implementation
 		public virtual IEnumerable<IWebElement> FindElements(By @by)
 		{
 			return Tag.FindElements(@by);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <typeparam name="TResult"></typeparam>
+		/// <param name="key"></param>
+		/// <returns></returns>
+		public virtual TResult Press<TResult>(Key key) where TResult : IBlock
+		{
+			Tag.SendKeys(key.Value);
+
+			return this.FindRelated<TResult>();
 		}
 
 		[Obsolete("This method is obsolete. Please use FindElement(By @by) instead.", error: true)]
